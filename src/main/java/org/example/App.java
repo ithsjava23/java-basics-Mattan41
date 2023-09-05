@@ -16,7 +16,7 @@ public class App {
                 case "1" -> inputElectricityPrice();
                 case "2" -> minMaxAverageValue();
                 case "3" -> sortElectricityPrices();
-                case "4" -> bestTimeToCharge();
+                case "4" -> cheapestTimeToCharge();
                 case "5" -> visualizeElectricityPrices();
         }
         }
@@ -24,13 +24,15 @@ public class App {
     }
 
     public static void printMenu() {
-        System.out.println("Elpriser\n" +
-                "========\n" +
-                "1. Inmatning\n" +
-                "2. Min, Max och Medel\n" +
-                "3. Sortera\n" +
-                "4. Bästa Laddningstid (4h)\n" +
-                "e. Avsluta");
+        System.out.print("""
+                Elpriser
+                ========
+                1. Inmatning
+                2. Min, Max och Medel
+                3. Sortera
+                4. Bästa Laddningstid (4h)
+                e. Avsluta
+                """);
     }
 
     public static void inputElectricityPrice() {
@@ -42,12 +44,12 @@ public class App {
     public static void sortElectricityPrices(){
         //ToDo: sorting Method
     }
-    public static void bestTimeToCharge(){
+    public static void cheapestTimeToCharge(){
         //ToDo: charge time method
     }
 
     public static void visualizeElectricityPrices(){
         //ToDo: Visualisation method
     }
-    public static void endProgram(){}
+
 }
