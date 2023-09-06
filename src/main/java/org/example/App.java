@@ -14,7 +14,7 @@ public class App {
         int[][] electricityPrice = new int[24][2];
 
 
-        while (!choice.equalsIgnoreCase("e")){
+        while (!choice.equalsIgnoreCase("e")) {
             printMenu();
             choice = sc.nextLine();
             switch (choice) {
@@ -30,6 +30,7 @@ public class App {
                 case "5" -> visualizeElectricityPrices();
             }
         }
+
 
 
     }
@@ -61,26 +62,35 @@ public class App {
         for (int i = 0; i < electricityPrice.length; i++) {
             if (electricityPrice[i][1] > max) {
                 max = electricityPrice[i][1];
-                maxRow = i;
             }
         }
-        String time = String.format("%02d", maxRow) + "-" + String.format("%02d", maxRow+1);
-        System.out.print("Högsta pris: " + time + ", " + max + " öre/kWh\n");
+        for (int i = 0; i < electricityPrice.length; i++) {
+            if (electricityPrice[i][1] == max) {
+                maxRow = i;
+                String time = String.format("%02d", maxRow) + "-" + String.format("%02d", maxRow + 1);
+                System.out.print("Högsta pris: " + time + ", " + max + " öre/kWh\n");
+            }
+        }
+
     }
-    //ToDo: create multiple responses if multiple max's
     public static void minValue(int[][] electricityPrice) {
         int min = Integer.MAX_VALUE;
         int minRow = -1;
         for (int i = 0; i < electricityPrice.length; i++) {
             if (electricityPrice[i][1] < min) {
                 min = electricityPrice[i][1];
-                minRow = i;
+                ;
             }
         }
-        String time = String.format("%02d", minRow) + "-" + String.format("%02d", minRow+1);
-        System.out.print("Lägsta pris: " + time + ", " + min + " öre/kWh\n");
+        for (int i = 0; i < electricityPrice.length; i++) {
+            if (electricityPrice[i][1] == min) {
+                minRow = i;
+                String time = String.format("%02d", minRow) + "-" + String.format("%02d", minRow + 1);
+                System.out.print("Lägsta pris: " + time + ", " + min + " öre/kWh\n");
+            }
+        }
     }
-    //ToDo: create multiple responses if multiple lows
+
     public static void averageValue(int[][] electricityPrice) {
         double sum = 0;
         for (int i = 0; i < electricityPrice.length; i++) {
@@ -89,8 +99,8 @@ public class App {
         double average = sum / electricityPrice.length;
         System.out.print("Medelpris: "+ average + " öre/kWh\n \n");
     }
-    private static void sortElectricityPrices(int[][] electricityPrice) {
-        Arrays.sort(electricityPrice, Comparator.comparingInt(a -> a[1]));
+    public static void sortElectricityPrices(int[][] electricityPrice) {
+        Arrays.sort(electricityPrice, Comparator.comparingInt(a -> a[1])); //toDo: sort array method
         for (int i = 0; i < electricityPrice.length; i++) {
             String time = String.format("%02d", electricityPrice[i][0]) + "-" + String.format("%02d", electricityPrice[i][0]+1);
             System.out.println(time + " " + electricityPrice[i][1] + " öre");
@@ -98,7 +108,7 @@ public class App {
     }
 
     public static void cheapestTimeToCharge(){
-        //ToDo: charge time method
+        //ToDo: best charge time method
     }
     public static void visualizeElectricityPrices(){
         //ToDo: Visualisation method + add menu choice
