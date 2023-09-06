@@ -13,7 +13,6 @@ public class App {
         String choice = "";
         int[][] electricityPrice = new int[24][2];
 
-
         while (!choice.equalsIgnoreCase("e")) {
             printMenu();
             choice = sc.nextLine();
@@ -30,8 +29,6 @@ public class App {
                 case "5" -> visualizeElectricityPrices();
             }
         }
-
-
 
     }
 
@@ -56,6 +53,7 @@ public class App {
 //ToDo: add method for no input
         }
     }
+
     public static void maxValue(int[][] electricityPrice) {
         int max = Integer.MIN_VALUE;
         int maxRow = -1;
@@ -90,7 +88,6 @@ public class App {
             }
         }
     }
-
     public static void averageValue(int[][] electricityPrice) {
         double sum = 0;
         for (int i = 0; i < electricityPrice.length; i++) {
@@ -99,13 +96,23 @@ public class App {
         double average = sum / electricityPrice.length;
         System.out.print("Medelpris: "+ average + " öre/kWh\n \n");
     }
+
     public static void sortElectricityPrices(int[][] electricityPrice) {
-        Arrays.sort(electricityPrice, Comparator.comparingInt(a -> a[1])); //toDo: sort array method
+        for (int i = 0; i < electricityPrice.length; i++) {
+            for (int j = i + 1; j < electricityPrice.length; j++) {
+                if (electricityPrice[i][1] > electricityPrice[j][1]) {
+                    int[] temp = electricityPrice[i];
+                    electricityPrice[i] = electricityPrice[j];
+                    electricityPrice[j] = temp;
+                }
+            }
+        }
         for (int i = 0; i < electricityPrice.length; i++) {
             String time = String.format("%02d", electricityPrice[i][0]) + "-" + String.format("%02d", electricityPrice[i][0]+1);
             System.out.println(time + " " + electricityPrice[i][1] + " öre");
         }
     }
+        //Arrays.sort(electricityPrice, Comparator.comparingInt(a -> a[1])); // sort array method
 
     public static void cheapestTimeToCharge(){
         //ToDo: best charge time method
