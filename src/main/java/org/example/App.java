@@ -1,6 +1,6 @@
 package org.example;
 
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 public class App {
@@ -20,7 +20,7 @@ public class App {
                 case "2" -> {
                     maxValue(electricityPrice);
                     minValue(electricityPrice);
-                    averageValue();
+                    averageValue(electricityPrice);
                 }
 
                 case "3" -> sortElectricityPrices();
@@ -50,7 +50,7 @@ public class App {
  */
 
 
-        // testa att array lagrar värden
+        /* testa att array lagrar värden
 
         for (int i = 0; i < electricityPrice.length; i++) {
             for (int j = 0; j < electricityPrice[i].length; j++) {
@@ -58,8 +58,12 @@ public class App {
         }
         System.out.println();
     }
+
+         */
             //System.out.println(Arrays.toString(electricityPrice));
     }
+
+
 
     public static void printMenu() {
         System.out.print("""
@@ -77,7 +81,7 @@ public class App {
             System.out.println("Ange elpris i öre för timme " + i + "-" + (i + 1) + ":");
             electricityPrice[i][1] = Integer.parseInt(sc.nextLine());
             electricityPrice[i][0] = (i);
-
+//ToDo: add method for no input
         }
     }
     public static void maxValue(int[][] electricityPrice) {
@@ -89,9 +93,10 @@ public class App {
                 maxRow = i;
             }
         }
-        System.out.println("timmen för högsta elpris är: " + maxRow + "-" + (maxRow+1)+ ", priset är " + max + " öre per kW/h" );
+        String price = String.format("%02d", maxRow) + "-" + String.format("%02d", maxRow+1);
+        System.out.print("Högsta pris: " + price + ", " + max + " öre/kWh\n");
     }
-
+    //ToDo: create multiple responses if multiple max's
     public static void minValue(int[][] electricityPrice) {
         int min = Integer.MAX_VALUE;
         int minRow = -1;
@@ -101,12 +106,19 @@ public class App {
                 minRow = i;
             }
         }
-        System.out.println("timmen för högsta elpris är: " + minRow + "-" + (minRow+1)+ ", priset är " + min + " öre per kW/h" );
+        String price = String.format("%02d", minRow) + "-" + String.format("%02d", minRow+1);
+        System.out.print("Lägsta pris: " + price + ", " + min + " öre/kWh\n");
+    }
+    //ToDo: create multiple responses if multiple lows
+    public static void averageValue(int[][] electricityPrice) {
+        double sum = 0;
+        for (int i = 0; i < electricityPrice.length; i++) {
+            sum += electricityPrice[i][1];
+        }
+        double average = sum / electricityPrice.length;
+        System.out.print("Medelpris: "+ average + " öre/kWh\n \n");
     }
 
-    public static void averageValue(){
-        //ToDo: minMaxMethod method
-    }
     public static void sortElectricityPrices(){
         //ToDo: sorting Method + print
     }
@@ -117,8 +129,5 @@ public class App {
         //ToDo: Visualisation method + add menu choice
     }
 
-    public static int getTime(int hour) {
-        return Integer.parseInt(String.format("%02d-%02d", hour, hour + 1));
-    }
 
 }
