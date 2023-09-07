@@ -47,10 +47,26 @@ public class App {
 
     public static void inputElectricityPrice(int[][] electricityPrice, Scanner sc) {
         for (int i = 0; i < electricityPrice.length; i++) {
-            System.out.println("Ange elpris i öre för timme " + i + "-" + (i + 1) + ":");
-            electricityPrice[i][1] = Integer.parseInt(sc.nextLine());
+
+            boolean success = false;
+            while (!success) {
+                System.out.println("Ange elpris i öre för timme " + i + "-" + (i + 1) + ":");
+
+                try {
+                    electricityPrice[i][1] = Integer.parseInt(sc.nextLine());
+                    if (electricityPrice[i][1] > 0) {
+                        success = true;
+                    }
+                    else {
+                        System.out.println("Felaktigt format. Försök igen.");
+                    }
+
+
+                } catch (NumberFormatException e) {
+                    System.out.println("Felaktigt format. Försök igen.");
+                }
+            }
             electricityPrice[i][0] = (i);
-//ToDo: add method for no input
         }
     }
 
@@ -109,9 +125,6 @@ public class App {
             System.out.println(time + " " + electricityPrice[i][1] + " öre");
         }
     }
-
-    //Arrays.sort(electricityPrice, Comparator.comparingInt(a -> a[1])); // sort array method
-
     public static void cheapestTimeToCharge(int[][] electricityPrice){
 
         int[][] cheapCharge = new int[4][2];
@@ -126,24 +139,6 @@ public class App {
             for (int i = 0; i < cheapCharge.length; i++) {
                 tempArray[i] = cheapCharge[i].clone();
             }
-
-        /*for (int row = 0; row < electricityPrice.length - 3; row++) {
-            System.arraycopy(electricityPrice, row, tempArray, 0, tempArray.length);
-
-                int sum1 = 0;
-                int sum2 = 0;
-
-                for (int i = 0; i < cheapCharge.length; i++) {
-                    sum1 += cheapCharge[i][1];
-                    sum2 += tempArray[i][1];
-                }
-                    if (sum2 < sum1) {
-                        System.arraycopy(tempArray, row , cheapCharge, 0, tempArray.length);
-                    }
-        }
-
-         */
-
 
         for (int row = 0; row < (electricityPrice.length - 3); row++) {
             for (int i = 0; i < 4; i++) {
@@ -172,25 +167,9 @@ public class App {
         }
 
 
-
         double average = getAverageDouble(cheapCharge);
         String time = String.format("%02d", cheapCharge[0][0]);
-            System.out.println("påbörja laddning: " + time + ", medelpris 4h: "+ average + " öre /kWh\n \n");
-
-
-
-/*
-
-        for (int i = 0; i < electricityPrice.length - 4; i++) {
-
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 2; j++) {
-                        int cheapCharge[i][j] = electricityPrice[i * 6 + j];
-                    }
-                }
-
- */
-
+            System.out.println("påbörja laddning kl: " + time + ", medelpris 4h: "+ average + " öre /kWh\n \n");
 
     }
     public static double getAverageDouble(int[][] electricityPrice) {
