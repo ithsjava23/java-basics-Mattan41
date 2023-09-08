@@ -50,7 +50,7 @@ public class App {
 
             boolean success = false;
             while (!success) {
-                System.out.println("Ange elpris i öre för timme " + i + "-" + (i + 1) + ":");
+                System.out.print("Ange elpris i öre för timme " + i + "-" + (i + 1) + ":\n");
 
                 try {
                     electricityPrice[i][1] = Integer.parseInt(sc.nextLine());
@@ -58,12 +58,12 @@ public class App {
                         success = true;
                     }
                     else {
-                        System.out.println("Felaktigt format. Försök igen.");
+                        System.out.print("Felaktigt format. Försök igen.\n");
                     }
 
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Felaktigt format. Försök igen.");
+                    System.out.print("Felaktigt format. Försök igen.\n");
                 }
             }
             electricityPrice[i][0] = (i);
@@ -122,7 +122,7 @@ public class App {
         }
         for (int i = 0; i < electricityPrice.length; i++) {
             String time = String.format("%02d", electricityPrice[i][0]) + "-" + String.format("%02d", electricityPrice[i][0]+1);
-            System.out.println(time + " " + electricityPrice[i][1] + " öre");
+            System.out.print(time + " " + electricityPrice[i][1] + " öre\n");
         }
     }
     public static void cheapestTimeToCharge(int[][] electricityPrice){
@@ -169,7 +169,7 @@ public class App {
 
         double average = getAverageDouble(cheapCharge);
         String time = String.format("%02d", cheapCharge[0][0]);
-            System.out.println("påbörja laddning kl: " + time + ", medelpris 4h: "+ average + " öre /kWh\n \n");
+            System.out.print("påbörja laddning kl: " + time + ", medelpris 4h: "+ average + " öre /kWh\n \n");
 
     }
     public static double getAverageDouble(int[][] electricityPrice) {
