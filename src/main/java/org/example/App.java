@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
-        Locale swedishLocale = new Locale("sv","SE");
+        Locale swedishLocale = new Locale ("sv","SE");
             Locale.setDefault(swedishLocale);
 
         Scanner sc = new Scanner(System.in);
@@ -186,29 +186,6 @@ public class App {
             sum += electricityPrice[i][1];
         }
         return sum / electricityPrice.length;
-    }
-    public static int sumArray(int [][] tempArray) {
-        int sum = 0;
-
-        for (int i = 0; i < tempArray.length; i++) {
-            sum += tempArray[i][0];
-        }
-        return sum;
-    }
-    public static double getAverage(int[][] cheapCharge) {
-        double sum = 0;
-        for (int i = 0; i < cheapCharge.length; i++) {
-            sum += cheapCharge[i][1];
-        }
-        return sum / cheapCharge.length;
-    }
-
-    public static double getAverageD(int[][] tempArray) {
-        double sum = 0;
-        for (int i = 0; i < tempArray.length; i++) {
-            sum += tempArray[i][1];
-        }
-        return sum / tempArray.length;
     }
 
 
