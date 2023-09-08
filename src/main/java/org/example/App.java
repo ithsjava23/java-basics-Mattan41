@@ -17,7 +17,7 @@ public class App {
 
         while (!choice.equalsIgnoreCase("e")) {
             printMenu();
-            choice = sc.nextLine();
+            choice = readChoice(sc);
             switch (choice) {
                 case "1" -> inputElectricityPrice(electricityPrice, sc);
                 case "2" -> {
@@ -35,7 +35,12 @@ public class App {
 
     }
 
-
+    public static int readValue(Scanner sc) {
+        return Integer.parseInt(sc.nextLine());
+    }
+    public static String readChoice(Scanner sc) {
+        return sc.nextLine();
+    }
     public static void printMenu() {
         System.out.print("""
                 Elpriser
@@ -56,7 +61,7 @@ public class App {
                 System.out.print("Ange elpris i öre för timme " + i + "-" + (i + 1) + ":\n");
 
                 try {
-                    electricityPrice[i][1] = Integer.parseInt(sc.nextLine());
+                    electricityPrice[i][1] = readValue(sc);
                     if (electricityPrice[i][1] > 0) {
                         success = true;
                     }
