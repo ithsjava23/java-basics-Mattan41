@@ -2,11 +2,14 @@ package org.example;
 
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
+        Locale swedishLocale = new Locale("sv","SE");
+            Locale.setDefault(swedishLocale);
 
         Scanner sc = new Scanner(System.in);
         String choice = "";
