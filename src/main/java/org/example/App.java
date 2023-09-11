@@ -28,7 +28,7 @@ public class App {
 
                 case "3" -> sortElectricityPrices(electricityPrice);
                 case "4" -> cheapestTimeToCharge(electricityPrice);
-                case "5" -> visualizeElectricityPrices();
+                //case "5" -> visualizeElectricityPrices();
             }
         }
 
@@ -207,9 +207,11 @@ public class App {
     }
 
 
-    public static void visualizeElectricityPrices(){
+    /*public static void visualizeElectricityPrices(){
         //ToDo: Visualisation method + add menu choice
     }
+
+     */
 
 
 }
