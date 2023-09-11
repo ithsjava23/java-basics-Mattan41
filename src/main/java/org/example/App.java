@@ -67,8 +67,8 @@ public class App {
                     if (electricityPrice[i][1] > 0) {
                         success = true;
                     }
-                    else {
-                        System.out.print("Felaktigt format. Försök igen.\n");
+                    else if (electricityPrice[i][1] <= 0) {
+                            success = true;
                     }
 
 
