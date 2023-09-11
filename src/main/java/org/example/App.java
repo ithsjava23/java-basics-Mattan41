@@ -2,6 +2,7 @@ package org.example;
 
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -129,11 +130,33 @@ public class App {
                 }
             }
         }
+
+
+        /*StringBuilder sb = new StringBuilder();
+        createTextblockOfSortedPrices(electricityPrice, sb);
+        String textBlock = sb.toString();
+        System.out.print(textBlock);
+
+         */
+
+        for (int i = electricityPrice.length - 1; i >= 0; i--) {
+            String time = String.format("%02d", electricityPrice[i][0]) + "-" + String.format("%02d", electricityPrice[i][0]+1);
+            String price = String.format("%d",electricityPrice[i][1]);
+            System.out.print(time + " " + price + " öre\n");
+        }
+
+
+    }
+
+
+    public static void createTextblockOfSortedPrices(int[][] electricityPrice, StringBuilder sb) {
         for (int i = 0; i < electricityPrice.length; i++) {
             String time = String.format("%02d", electricityPrice[i][0]) + "-" + String.format("%02d", electricityPrice[i][0]+1);
-            System.out.print(time + " " + electricityPrice[i][1] + " öre\n");
+            String price = String.format("%d", electricityPrice[i][1]);
+            sb.append(time + " " + price + " öre\n");
         }
     }
+
     public static void cheapestTimeToCharge(int[][] electricityPrice){
 
         int[][] cheapCharge = new int[4][2];
