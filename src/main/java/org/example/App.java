@@ -83,9 +83,9 @@ public class App {
     public static void maxValue(int[][] electricityPrice) {
         int max = Integer.MIN_VALUE;
         int maxRow;
-        for (int i = 0; i < electricityPrice.length; i++) {
-            if (electricityPrice[i][1] > max) {
-                max = electricityPrice[i][1];
+        for (int[] ints : electricityPrice) {
+            if (ints[1] > max) {
+                max = ints[1];
             }
         }
         for (int i = 0; i < electricityPrice.length; i++) {
@@ -101,9 +101,9 @@ public class App {
     public static void minValue(int[][] electricityPrice) {
         int min = Integer.MAX_VALUE;
         int minRow;
-        for (int i = 0; i < electricityPrice.length; i++) {
-            if (electricityPrice[i][1] < min) {
-                min = electricityPrice[i][1];
+        for (int[] ints : electricityPrice) {
+            if (ints[1] < min) {
+                min = ints[1];
 
             }
         }
@@ -123,12 +123,10 @@ public class App {
     }
 
     public static String getStringAverageFormat(double average) {
-        String str = String.format("%.2f", average).replace(".", ",");
-        return str;
+        return String.format("%.2f", average).replace(".", ",");
     }
-    public static String getStringAverageOneDeicmalFormat(double average) {
-        String str = String.format("%.1f", average).replace(".", ",");
-        return str;
+    public static String getStringAverageOneDecimalFormat(double average) {
+        return String.format("%.1f", average).replace(".", ",");
     }
 
 
@@ -143,14 +141,6 @@ public class App {
             }
         }
 
-
-        /*StringBuilder sb = new StringBuilder();
-        createTextblockOfSortedPrices(electricityPrice, sb);
-        String textBlock = sb.toString();
-        System.out.print(textBlock);
-
-         */
-
         for (int i = electricityPrice.length - 1; i >= 0; i--) {
             String time = String.format("%02d", electricityPrice[i][0]) + "-" + String.format("%02d", electricityPrice[i][0]+1);
             String price = String.format("%d",electricityPrice[i][1]);
@@ -160,23 +150,14 @@ public class App {
 
     }
 
-
-    public static void createTextblockOfSortedPrices(int[][] electricityPrice, StringBuilder sb) {
-        for (int i = 0; i < electricityPrice.length; i++) {
-            String time = String.format("%02d", electricityPrice[i][0]) + "-" + String.format("%02d", electricityPrice[i][0]+1);
-            String price = String.format("%d", electricityPrice[i][1]);
-            sb.append(time + " " + price + " öre\n");
-        }
-    }
-
     public static void cheapestTimeToCharge(int[][] electricityPrice){
 
         int[][] cheapCharge = new int[4][2];
 
             int max = Integer.MAX_VALUE;
-            for (int i = 0; i < cheapCharge.length; i++) {
-                Arrays.fill(cheapCharge[i], max);
-            }
+        for (int[] ints : cheapCharge) {
+            Arrays.fill(ints, max);
+        }
 
         int[][] tempArray = new int[cheapCharge.length][cheapCharge[0].length];
 
@@ -213,14 +194,14 @@ public class App {
 
         double average = getAverageDouble(cheapCharge);
         String time = String.format("%02d", cheapCharge[0][0]);
-        String str = getStringAverageOneDeicmalFormat(average);
+        String str = getStringAverageOneDecimalFormat(average);
             System.out.print("Påbörja laddning klockan " + time + "\nMedelpris 4h: " + str + " öre/kWh\n");
 
     }
     public static double getAverageDouble(int[][] electricityPrice) {
         double sum = 0;
-        for (int i = 0; i < electricityPrice.length; i++) {
-            sum += electricityPrice[i][1];
+        for (int[] ints : electricityPrice) {
+            sum += ints[1];
         }
         return sum / electricityPrice.length;
     }
