@@ -43,6 +43,7 @@ public class App {
     }
     public static void printMenu() {
         System.out.print("""
+                
                 Elpriser
                 ========
                 1. Inmatning
@@ -50,6 +51,7 @@ public class App {
                 3. Sortera
                 4. Bästa Laddningstid (4h)
                 e. Avsluta
+                
                 """);
     }
 
@@ -117,13 +119,18 @@ public class App {
         double average = getAverageDouble(electricityPrice);
 
         String str = getStringAverageFormat(average);
-        System.out.print("Medelpris: "+ str + " öre/kWh\n \n");
+        System.out.print("Medelpris: "+ str + " öre/kWh\n");
     }
 
     public static String getStringAverageFormat(double average) {
         String str = String.format("%.2f", average).replace(".", ",");
         return str;
     }
+    public static String getStringAverageOneDeicmalFormat(double average) {
+        String str = String.format("%.1f", average).replace(".", ",");
+        return str;
+    }
+
 
     public static void sortElectricityPrices(int[][] electricityPrice) {
         for (int i = 0; i < electricityPrice.length; i++) {
@@ -206,8 +213,8 @@ public class App {
 
         double average = getAverageDouble(cheapCharge);
         String time = String.format("%02d", cheapCharge[0][0]);
-        String str = getStringAverageFormat(average);
-            System.out.print("påbörja laddning kl: " + time + ", medelpris 4h: "+ str + " öre /kWh\n \n");
+        String str = getStringAverageOneDeicmalFormat(average);
+            System.out.print("Påbörja laddning klockan " + time + "\nMedelpris 4h: " + str + " öre/kWh\n");
 
     }
     public static double getAverageDouble(int[][] electricityPrice) {
