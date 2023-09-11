@@ -135,7 +135,7 @@ public class App {
     public static void sortElectricityPrices(int[][] electricityPrice) {
         for (int i = 0; i < electricityPrice.length; i++) {
             for (int j = i + 1; j < electricityPrice.length; j++) {
-                if (electricityPrice[i][1] > electricityPrice[j][1]) {
+                if (electricityPrice[i][1] >= electricityPrice[j][1]) {
                     int[] temp = electricityPrice[i];
                     electricityPrice[i] = electricityPrice[j];
                     electricityPrice[j] = temp;
