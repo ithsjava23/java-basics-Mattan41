@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
-        Locale swedishLocale = new Locale ("sv","SE");
+        Locale swedishLocale = new Locale("sv","SE");
             Locale.setDefault(swedishLocale);
 
         Scanner sc = new Scanner(System.in);
@@ -21,8 +21,8 @@ public class App {
             switch (choice) {
                 case "1" -> inputElectricityPrice(electricityPrice, sc);
                 case "2" -> {
-                    maxValue(electricityPrice);
                     minValue(electricityPrice);
+                    maxValue(electricityPrice);
                     averageValue(electricityPrice);
                 }
 
@@ -115,8 +115,9 @@ public class App {
     }
     public static void averageValue(int[][] electricityPrice) {
         double average = getAverageDouble(electricityPrice);
-        //float getAverage(electricityPrice);
-        System.out.print("Medelpris: "+ average + " öre/kWh\n \n");
+
+        String str = String.format("%.2f", average).replace(".", ",");
+        System.out.print("Medelpris: "+ str + " öre/kWh\n \n");
     }
     public static void sortElectricityPrices(int[][] electricityPrice) {
         for (int i = 0; i < electricityPrice.length; i++) {
