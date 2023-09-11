@@ -2,7 +2,6 @@ package org.example;
 
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -117,9 +116,15 @@ public class App {
     public static void averageValue(int[][] electricityPrice) {
         double average = getAverageDouble(electricityPrice);
 
-        String str = String.format("%.2f", average).replace(".", ",");
+        String str = getStringAverageFormat(average);
         System.out.print("Medelpris: "+ str + " öre/kWh\n \n");
     }
+
+    public static String getStringAverageFormat(double average) {
+        String str = String.format("%.2f", average).replace(".", ",");
+        return str;
+    }
+
     public static void sortElectricityPrices(int[][] electricityPrice) {
         for (int i = 0; i < electricityPrice.length; i++) {
             for (int j = i + 1; j < electricityPrice.length; j++) {
@@ -201,7 +206,8 @@ public class App {
 
         double average = getAverageDouble(cheapCharge);
         String time = String.format("%02d", cheapCharge[0][0]);
-            System.out.print("påbörja laddning kl: " + time + ", medelpris 4h: "+ average + " öre /kWh\n \n");
+        String str = getStringAverageFormat(average);
+            System.out.print("påbörja laddning kl: " + time + ", medelpris 4h: "+ str + " öre /kWh\n \n");
 
     }
     public static double getAverageDouble(int[][] electricityPrice) {
