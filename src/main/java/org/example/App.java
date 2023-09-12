@@ -43,15 +43,16 @@ public class App {
     }
     public static void printMenu() {
         System.out.print("""
-                
+                                
                 Elpriser
                 ========
                 1. Inmatning
                 2. Min, Max och Medel
                 3. Sortera
                 4. Bästa Laddningstid (4h)
+                5. Visualisering
                 e. Avsluta
-                
+                                
                 """);
     }
 
@@ -221,10 +222,47 @@ public class App {
     public static void visualizeElectricityPrices(int[][] electricityPrice){
 
         int max = getMaxValue(electricityPrice);
-        int min = getMinValue(electricityPrice);
-        System.out.println(max +"-"+ min);
+       // String insteadOfMax = Integer.toString(max).replaceAll("[^a]", " ");
 
-        //ToDo: Visualisation method
+        int min = getMinValue(electricityPrice);
+        String value = "  x";
+        String noValue = "   ";
+        int price = 0;
+        for (int i = 0; i < 6; i++) {
+
+            if (i == 0)
+            System.out.print(max+"|"); // första varvet max, nästa max ggr 0.8 osv
+            else if (i == 5)
+                System.out.print(" " + min +"|");
+            else
+                System.out.print("   "+"|");
+
+            for (int j = 0; j < electricityPrice.length; j++) {
+                if (max == price)
+                System.out.print(value);
+                else
+                    System.out.print(noValue);
+
+            }
+            System.out.print("\n");
+        }
+        System.out.print("""
+                   |------------------------------------------------------------------------
+                   | 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+                """);
+        /*for (int i = 0; i < electricityPrice.length; i++) {
+            for (int j = i + 1; j < electricityPrice.length; j++) {
+
+                if (electricityPrice[i][1] >= electricityPrice[j][1]) {
+
+                    System.out.print(value);
+
+                }
+                else
+                    System.out.print(noValue);
+
+         */
+
     }
 
 }
