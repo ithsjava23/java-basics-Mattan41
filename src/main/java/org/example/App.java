@@ -223,7 +223,6 @@ public class App {
 
         int max = getMaxValue(electricityPrice);
         double price = max;
-       // String insteadOfMax = Integer.toString(max).replaceAll("[^a]", " ");
 
         int min = getMinValue(electricityPrice);
         String value = "  x";
@@ -232,14 +231,14 @@ public class App {
         for (int i = 0; i < 6; i++) {
 
             if (i == 0)
-            System.out.print(max+"|"); // första varvet max, nästa max ggr 0.8 osv
+            System.out.print(max+"|");
             else if (i == 5)
                 System.out.print(" " + min +"|");
             else
                 System.out.print("   "+"|");
 
             for (int j = 0; j < electricityPrice.length; j++) {
-                // här kommer koden för att loopa igenom arrayen: jämföra värdet i kolumn 2 som double
+
                 if (electricityPrice[j][1] >= price)
                 System.out.print(value);
                 else
@@ -253,16 +252,6 @@ public class App {
                    |------------------------------------------------------------------------
                    | 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23
                 """);
-        /*for (int i = 0; i < electricityPrice.length; i++) {
-                if (electricityPrice[i][1] >= price {
-
-                    System.out.print(value);
-
-                }
-                else
-                    System.out.print(noValue);
-
-         */
 
     }
 
