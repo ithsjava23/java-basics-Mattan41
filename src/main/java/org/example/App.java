@@ -98,9 +98,9 @@ public class App {
     public static int getMaxValue(int[][] electricityPrice) {
         int max = Integer.MIN_VALUE;
 
-        for (int[] ints : electricityPrice) {
-            if (ints[1] > max) {
-                max = ints[1];
+        for (int[] tempArray : electricityPrice) {
+            if (tempArray[1] > max) {
+                max = tempArray[1];
             }
         }
         return max;
@@ -121,9 +121,9 @@ public class App {
     private static int getMinValue(int[][] electricityPrice) {
 
         int min = Integer.MAX_VALUE;
-        for (int[] ints : electricityPrice) {
-            if (ints[1] < min) {
-                min = ints[1];
+        for (int[] tempArray : electricityPrice) {
+            if (tempArray[1] < min) {
+                min = tempArray[1];
 
             }
         }
@@ -222,31 +222,41 @@ public class App {
     public static void visualizeElectricityPrices(int[][] electricityPrice){
 
         int max = getMaxValue(electricityPrice);
-        double price = max;
-
         int min = getMinValue(electricityPrice);
-        String value = "  x";
-        String noValue = "   ";
+        double comparePrice = max;
 
         for (int i = 0; i < 6; i++) {
 
-            if (i == 0)
-            System.out.print(max+"|");
-            else if (i == 5)
-                System.out.print(" " + min +"|");
-            else
+            if (i == 0) {
+                System.out.print(max+"|");
+            }
+            else if (i == 5) {
+
+                if (min < 0) {
+                    System.out.print(min + "|");
+                }
+                else {
+                    System.out.print(" " + min + "|");
+                }
+
+            }
+            else {
                 System.out.print("   "+"|");
+            }
+
+            String response = "  x";
+            String noResponse = "   ";
 
             for (int j = 0; j < electricityPrice.length; j++) {
 
-                if (electricityPrice[j][1] >= price)
-                System.out.print(value);
+                if (electricityPrice[j][1] >= comparePrice)
+                System.out.print(response);
                 else
-                    System.out.print(noValue);
+                    System.out.print(noResponse);
 
             }
             System.out.print("\n");
-            price  = price - (max - min) * 0.2;
+            comparePrice  = comparePrice - (double) (max - min) * 0.2;
         }
         System.out.print("""
                    |------------------------------------------------------------------------
