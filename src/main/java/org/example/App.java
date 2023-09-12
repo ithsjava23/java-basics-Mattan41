@@ -222,12 +222,13 @@ public class App {
     public static void visualizeElectricityPrices(int[][] electricityPrice){
 
         int max = getMaxValue(electricityPrice);
+        double price = max;
        // String insteadOfMax = Integer.toString(max).replaceAll("[^a]", " ");
 
         int min = getMinValue(electricityPrice);
         String value = "  x";
         String noValue = "   ";
-        int price = 0;
+
         for (int i = 0; i < 6; i++) {
 
             if (i == 0)
@@ -238,22 +239,22 @@ public class App {
                 System.out.print("   "+"|");
 
             for (int j = 0; j < electricityPrice.length; j++) {
-                if (max == price)
+                // här kommer koden för att loopa igenom arrayen: jämföra värdet i kolumn 2 som double
+                if (electricityPrice[j][1] >= price)
                 System.out.print(value);
                 else
                     System.out.print(noValue);
 
             }
             System.out.print("\n");
+            price  = price - (max - min) * 0.2;
         }
         System.out.print("""
                    |------------------------------------------------------------------------
                    | 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23
                 """);
         /*for (int i = 0; i < electricityPrice.length; i++) {
-            for (int j = i + 1; j < electricityPrice.length; j++) {
-
-                if (electricityPrice[i][1] >= electricityPrice[j][1]) {
+                if (electricityPrice[i][1] >= price {
 
                     System.out.print(value);
 
