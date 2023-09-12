@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
-        Locale swedishLocale = new Locale("sv","SE");
+        Locale swedishLocale = Locale.of("sv","SE");
             Locale.setDefault(swedishLocale);
 
         Scanner sc = new Scanner(System.in);
@@ -21,14 +21,14 @@ public class App {
             switch (choice) {
                 case "1" -> inputElectricityPrice(electricityPrice, sc);
                 case "2" -> {
-                    minValue(electricityPrice);
-                    maxValue(electricityPrice);
+                    printMinValue(electricityPrice);
+                    printMaxValue(electricityPrice);
                     averageValue(electricityPrice);
                 }
 
                 case "3" -> sortElectricityPrices(electricityPrice);
                 case "4" -> cheapestTimeToCharge(electricityPrice);
-                //case "5" -> visualizeElectricityPrices();
+                case "5" -> visualizeElectricityPrices(electricityPrice);
             }
         }
 
@@ -80,14 +80,10 @@ public class App {
         }
     }
 
-    public static void maxValue(int[][] electricityPrice) {
-        int max = Integer.MIN_VALUE;
+    public static void printMaxValue(int[][] electricityPrice) {
+
+        int max = getMaxValue(electricityPrice);
         int maxRow;
-        for (int[] ints : electricityPrice) {
-            if (ints[1] > max) {
-                max = ints[1];
-            }
-        }
         for (int i = 0; i < electricityPrice.length; i++) {
             if (electricityPrice[i][1] == max) {
                 maxRow = i;
@@ -98,15 +94,20 @@ public class App {
 
     }
 
-    public static void minValue(int[][] electricityPrice) {
-        int min = Integer.MAX_VALUE;
-        int minRow;
-        for (int[] ints : electricityPrice) {
-            if (ints[1] < min) {
-                min = ints[1];
+    public static int getMaxValue(int[][] electricityPrice) {
+        int max = Integer.MIN_VALUE;
 
+        for (int[] ints : electricityPrice) {
+            if (ints[1] > max) {
+                max = ints[1];
             }
         }
+        return max;
+    }
+
+    public static void printMinValue(int[][] electricityPrice) {
+        int min = getMinValue(electricityPrice);
+        int minRow;
         for (int i = 0; i < electricityPrice.length; i++) {
             if (electricityPrice[i][1] == min) {
                 minRow = i;
@@ -115,11 +116,25 @@ public class App {
             }
         }
     }
-    public static void averageValue(int[][] electricityPrice) {
-        double average = getAverageDouble(electricityPrice);
 
+    private static int getMinValue(int[][] electricityPrice) {
+
+        int min = Integer.MAX_VALUE;
+        for (int[] ints : electricityPrice) {
+            if (ints[1] < min) {
+                min = ints[1];
+
+            }
+        }
+        return min;
+    }
+
+    public static void averageValue(int[][] electricityPrice) {
+
+        double average = getAverageDouble(electricityPrice);
         String str = getStringAverageFormat(average);
         System.out.print("Medelpris: "+ str + " öre/kWh\n");
+
     }
 
     public static String getStringAverageFormat(double average) {
@@ -128,8 +143,6 @@ public class App {
     public static String getStringAverageOneDecimalFormat(double average) {
         return String.format("%.1f", average).replace(".", ",");
     }
-
-
     public static void sortElectricityPrices(int[][] electricityPrice) {
         for (int i = 0; i < electricityPrice.length; i++) {
             for (int j = i + 1; j < electricityPrice.length; j++) {
@@ -191,7 +204,6 @@ public class App {
 
         }
 
-
         double average = getAverageDouble(cheapCharge);
         String time = String.format("%02d", cheapCharge[0][0]);
         String str = getStringAverageOneDecimalFormat(average);
@@ -206,12 +218,13 @@ public class App {
         return sum / electricityPrice.length;
     }
 
+    public static void visualizeElectricityPrices(int[][] electricityPrice){
 
-    /*public static void visualizeElectricityPrices(){
-        //ToDo: Visualisation method + add menu choice
+        int max = getMaxValue(electricityPrice);
+        int min = getMinValue(electricityPrice);
+        System.out.println(max +"-"+ min);
+
+        //ToDo: Visualisation method
     }
-
-     */
-
 
 }
