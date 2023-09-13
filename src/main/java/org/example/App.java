@@ -248,15 +248,16 @@ public class App {
             String noResponse = "   ";
 
             for (int j = 0; j < electricityPrice.length; j++) {
-
-                if (electricityPrice[j][1] >= comparePrice)
+                   double comparePriceTemp = Math.floor(comparePrice);
+                if (electricityPrice[j][1] >= comparePriceTemp)
                 System.out.print(response);
                 else
                     System.out.print(noResponse);
 
             }
             System.out.print("\n");
-            comparePrice  = Math.floor(comparePrice - (max - min) * 0.2);
+            comparePrice  = comparePrice - (max - min) * 0.2;
+
         }
         System.out.print("""
                    |------------------------------------------------------------------------
