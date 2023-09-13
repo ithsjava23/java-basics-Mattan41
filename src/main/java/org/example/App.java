@@ -256,7 +256,7 @@ public class App {
 
             }
             System.out.print("\n");
-            comparePrice  = comparePrice - (double) (max - min) * 0.2;
+            comparePrice  = Math.floor(comparePrice - (max - min) * 0.2);
         }
         System.out.print("""
                    |------------------------------------------------------------------------
