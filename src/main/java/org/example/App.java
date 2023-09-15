@@ -23,10 +23,10 @@ public class App {
                 case "2" -> {
                     printMinValue(electricityPrice);
                     printMaxValue(electricityPrice);
-                    averageValue(electricityPrice);
+                    printAverageValue(electricityPrice);
                 }
 
-                case "3" -> sortElectricityPrices(electricityPrice);
+                case "3" -> sortAndPrintElectricityPrices(electricityPrice);
                 case "4" -> cheapestTimeToCharge(electricityPrice);
                 case "5" -> visualizeElectricityPrices(electricityPrice);
             }
@@ -130,7 +130,7 @@ public class App {
         return min;
     }
 
-    public static void averageValue(int[][] electricityPrice) {
+    public static void printAverageValue(int[][] electricityPrice) {
 
         double average = getAverageDouble(electricityPrice);
         String str = getStringAverageFormat(average);
@@ -144,7 +144,12 @@ public class App {
     public static String getStringAverageOneDecimalFormat(double average) {
         return String.format("%.1f", average).replace(".", ",");
     }
-    public static void sortElectricityPrices(int[][] electricityPrice) {
+    public static void sortAndPrintElectricityPrices(int[][] electricityPrice) {
+        SortElectricityPrices(electricityPrice);
+        printOutElectricityPricesSorted(electricityPrice);
+    }
+
+    public static void SortElectricityPrices(int[][] electricityPrice) {
         for (int i = 0; i < electricityPrice.length; i++) {
             for (int j = i + 1; j < electricityPrice.length; j++) {
                 if (electricityPrice[i][1] >= electricityPrice[j][1]) {
@@ -154,24 +159,21 @@ public class App {
                 }
             }
         }
+    }
 
+    public static void printOutElectricityPricesSorted(int[][] electricityPrice) {
         for (int i = electricityPrice.length - 1; i >= 0; i--) {
             String time = String.format("%02d", electricityPrice[i][0]) + "-" + String.format("%02d", electricityPrice[i][0]+1);
-            String price = String.format("%d",electricityPrice[i][1]);
+            String price = String.format("%d", electricityPrice[i][1]);
             System.out.print(time + " " + price + " öre\n");
         }
-
-
     }
 
     public static void cheapestTimeToCharge(int[][] electricityPrice){
 
         int[][] cheapCharge = new int[4][2];
 
-            int max = Integer.MAX_VALUE;
-        for (int[] ints : cheapCharge) {
-            Arrays.fill(ints, max);
-        }
+        fillCheapChargeWithMaxValue(cheapCharge);
 
         int[][] tempArray = new int[cheapCharge.length][cheapCharge[0].length];
 
@@ -179,6 +181,17 @@ public class App {
                 tempArray[i] = cheapCharge[i].clone();
             }
 
+        extractCheapestInterval(electricityPrice, tempArray, cheapCharge);
+
+        double average = getAverageDouble(cheapCharge);
+        String time = String.format("%02d", cheapCharge[0][0]);
+        String str = getStringAverageOneDecimalFormat(average);
+
+            System.out.print("Påbörja laddning klockan " + time + "\nMedelpris 4h: " + str + " öre/kWh\n");
+
+    }
+
+    public static void extractCheapestInterval(int[][] electricityPrice, int[][] tempArray, int[][] cheapCharge) {
         for (int row = 0; row < (electricityPrice.length - 3); row++) {
             for (int i = 0; i < 4; i++) {
 
@@ -204,13 +217,15 @@ public class App {
             }
 
         }
-
-        double average = getAverageDouble(cheapCharge);
-        String time = String.format("%02d", cheapCharge[0][0]);
-        String str = getStringAverageOneDecimalFormat(average);
-            System.out.print("Påbörja laddning klockan " + time + "\nMedelpris 4h: " + str + " öre/kWh\n");
-
     }
+
+    public static void fillCheapChargeWithMaxValue(int[][] cheapCharge) {
+        int max = Integer.MAX_VALUE;
+        for (int[] ints : cheapCharge) {
+        Arrays.fill(ints, max);
+    }
+    }
+
     public static double getAverageDouble(int[][] electricityPrice) {
         double sum = 0;
         for (int[] ints : electricityPrice) {
@@ -247,14 +262,7 @@ public class App {
             String response = "  x";
             String noResponse = "   ";
 
-            for (int j = 0; j < electricityPrice.length; j++) {
-                   double comparePriceTemp = Math.floor(comparePrice);
-                if (electricityPrice[j][1] >= comparePriceTemp)
-                System.out.print(response);
-                else
-                    System.out.print(noResponse);
-
-            }
+            printOutRow(electricityPrice, comparePrice, response, noResponse);
             System.out.print("\n");
             comparePrice  = comparePrice - (max - min) * 0.2;
 
@@ -264,6 +272,17 @@ public class App {
                    | 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23
                 """);
 
+    }
+
+    public static void printOutRow(int[][] electricityPrice, double comparePrice, String response, String noResponse) {
+        for (int j = 0; j < electricityPrice.length; j++) {
+               double comparePriceTemp = Math.floor(comparePrice);
+            if (electricityPrice[j][1] >= comparePriceTemp)
+            System.out.print(response);
+            else
+                System.out.print(noResponse);
+
+        }
     }
 
 }
