@@ -259,10 +259,7 @@ public class App {
                 System.out.print("   "+"|");
             }
 
-            String response = "  x";
-            String noResponse = "   ";
-
-            printOutRow(electricityPrice, comparePrice, response, noResponse);
+            printOutRow(electricityPrice, comparePrice);
             System.out.print("\n");
             comparePrice  = comparePrice - (max - min) * 0.2;
 
@@ -274,7 +271,11 @@ public class App {
 
     }
 
-    public static void printOutRow(int[][] electricityPrice, double comparePrice, String response, String noResponse) {
+    public static void printOutRow(int[][] electricityPrice, double comparePrice) {
+
+        String response = "  x";
+        String noResponse = "   ";
+
         for (int j = 0; j < electricityPrice.length; j++) {
                double comparePriceTemp = Math.floor(comparePrice);
             if (electricityPrice[j][1] >= comparePriceTemp)
