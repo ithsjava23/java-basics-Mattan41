@@ -122,6 +122,7 @@ public class App {
 
         int min = Integer.MAX_VALUE;
         for (int[] tempArray : electricityPrice) {
+
             if (tempArray[1] < min) {
                 min = tempArray[1];
 
@@ -139,10 +140,10 @@ public class App {
     }
 
     public static String getStringAverageFormat(double average) {
-        return String.format("%.2f", average).replace(".", ",");
+        return String.format("%.2f", average);
     }
     public static String getStringAverageOneDecimalFormat(double average) {
-        return String.format("%.1f", average).replace(".", ",");
+        return String.format("%.1f", average);
     }
     public static void sortAndPrintElectricityPrices(int[][] electricityPrice) {
         SortElectricityPrices(electricityPrice);
